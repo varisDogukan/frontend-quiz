@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Rubik } from "next/font/google";
 import "./globals.css";
 import React from "react";
+import Navbar from "@/components/Navbar";
+import { ThemeProvider } from "@/context/ThemeProvider";
 
 const rubik = Rubik({
   subsets: ["latin"],
@@ -22,7 +24,14 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={rubik.className}>{children}</body>
+      <body className={`${rubik.className}`}>
+        <ThemeProvider>
+          <main className="main-bg h-full min-h-screen">
+            <Navbar />
+            {children}
+          </main>
+        </ThemeProvider>
+      </body>
     </html>
   );
 }

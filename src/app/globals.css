@@ -8,4 +8,8 @@
   .flex-center {
     @apply flex justify-center items-center;
   }
+
+  .container {
+    @apply max-w-[min(95%,1160px)] mx-auto;
+  }
 }

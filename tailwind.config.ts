@@ -1,6 +1,7 @@
 import type { Config } from "tailwindcss";
 
 const config: Config = {
+  darkMode: ["class"],
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -33,6 +34,9 @@ const config: Config = {
       boxShadow: {
         normal: "0px 16px 40px 0px rgba(143, 160, 193, 0.14)",
       },
+    },
+    screens: {
+      xl: "1440px",
     },
   },
   plugins: [],

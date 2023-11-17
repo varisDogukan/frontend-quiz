@@ -11,11 +11,11 @@
     @apply bg-dark-300 dark:bg-light-500;
   }
 
-  .main-bg-color {
-    @apply bg-dark-100 dark:bg-light-800;
+  .main-bg {
+    @apply bg-light-800 dark:bg-dark-100;
   }
 
-  .bg-color {
+  .question-bg {
     @apply bg-light-900 dark:bg-dark-200;
   }
 
