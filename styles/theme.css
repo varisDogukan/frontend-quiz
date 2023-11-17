@@ -1,3 +1,25 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer utilities {
+  .text-color {
+    @apply text-dark-100 dark:text-light-900;
+  }
+
+  .sm-text-color {
+    @apply bg-dark-300 dark:bg-light-500;
+  }
+
+  .main-bg-color {
+    @apply bg-dark-100 dark:bg-light-800;
+  }
+
+  .bg-color {
+    @apply bg-light-900 dark:bg-dark-200;
+  }
+
+  .error-color {
+    @apply text-red dark:text-light-900;
+  }
+}
