@@ -8,7 +8,7 @@
   }
 
   .sm-text-color {
-    @apply bg-dark-300 dark:bg-light-500;
+    @apply text-dark-300 dark:text-light-500;
   }
 
   .main-bg {
@@ -21,5 +21,9 @@
 
   .error-color {
     @apply text-red dark:text-light-900;
+  }
+
+  .shadow-theme {
+    @apply shadow-light dark:shadow-dark;
   }
 }

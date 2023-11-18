@@ -4,6 +4,7 @@ import "./globals.css";
 import React from "react";
 import Navbar from "@/components/Navbar";
 import { ThemeProvider } from "@/context/ThemeProvider";
+import { QuestionProvider } from "@/context/question/QuestionProvider";
 
 const rubik = Rubik({
   subsets: ["latin"],
@@ -26,10 +27,12 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${rubik.className}`}>
         <ThemeProvider>
-          <main className="main-bg h-full min-h-screen">
-            <Navbar />
-            {children}
-          </main>
+          <QuestionProvider>
+            <main className="main-bg text-color h-full min-h-screen">
+              <Navbar />
+              {children}
+            </main>
+          </QuestionProvider>
         </ThemeProvider>
       </body>
     </html>

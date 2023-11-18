@@ -27,15 +27,23 @@ const config: Config = {
           200: "#3B4D66", // navy
           300: "#626C7F", // grey navy
         },
+        question: {
+          HTML: "#FFF1E9",
+          CSS: "#E0FDEF",
+          Javascript: "#EBF0FF",
+          Accessibility: "#F6E7FF",
+        },
       },
       fontFamily: {
         rubik: ["var(--font-rubik)"],
       },
       boxShadow: {
-        normal: "0px 16px 40px 0px rgba(143, 160, 193, 0.14)",
+        light: "0px 16px 40px 0px rgba(143, 160, 193, 0.14)",
+        dark: "0px 16px 40px 0px rgba(49, 62, 81, 0.14)",
       },
     },
     screens: {
+      md: "768px",
       xl: "1440px",
     },
   },
