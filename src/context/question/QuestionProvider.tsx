@@ -8,7 +8,13 @@ import {
   FunctionComponent,
 } from "react";
 import reducer from "./reducer";
-import { ActionTypes, IQuestionContextType, State } from "./types";
+import {
+  ActionTypes,
+  IQuestionContextType,
+  QuestionType,
+  State,
+} from "./types";
+import data from "@/app/data.json";
 
 const initialState: State = {
   title: "",
@@ -40,6 +46,21 @@ const QuestionProvider: FunctionComponent<{ children: ReactNode }> = ({
 
   function getQuestions() {}
 
+  function getQuestionType() {
+    const result = data.quizzes;
+    const tempTypes: QuestionType[] = [];
+
+    result.map((item) =>
+      tempTypes.push({
+        icon: item.icon,
+        id: crypto.randomUUID(),
+        title: item.title,
+      })
+    );
+
+    dispatch({ type: ActionTypes.GET_QUESTION_TYPE, payload: tempTypes });
+  }
+
   function changeTitle() {}
 
   function incrementCurrentAnswer() {}
@@ -53,6 +74,7 @@ const QuestionProvider: FunctionComponent<{ children: ReactNode }> = ({
         dispatch,
         changeTitle,
         getQuestions,
+        getQuestionType,
         incrementCurrentAnswer,
         resetState,
       }}

@@ -30,7 +30,7 @@ const config: Config = {
         question: {
           HTML: "#FFF1E9",
           CSS: "#E0FDEF",
-          Javascript: "#EBF0FF",
+          JavaScript: "#EBF0FF",
           Accessibility: "#F6E7FF",
         },
       },

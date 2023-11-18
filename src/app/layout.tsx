@@ -28,7 +28,7 @@ export default function RootLayout({
       <body className={`${rubik.className}`}>
         <ThemeProvider>
           <QuestionProvider>
-            <main className="main-bg text-color h-full min-h-screen">
+            <main className="main-bg text-color h-full min-h-screen pb-10">
               <Navbar />
               {children}
             </main>

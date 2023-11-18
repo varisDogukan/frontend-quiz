@@ -9,6 +9,12 @@ const reducer = (state: State, action: Action): State => {
     case ActionTypes.GET_QUESTION:
       return state;
 
+    case ActionTypes.GET_QUESTION_TYPE:
+      return {
+        ...state,
+        questionTypes: action.payload,
+      };
+
     case ActionTypes.INCREMENT_CURRENT_ANSWER:
       return state;
 
