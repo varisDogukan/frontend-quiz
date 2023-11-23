@@ -35,6 +35,22 @@ const config: Config = {
         light: "0px 16px 40px 0px rgba(143, 160, 193, 0.14)",
         dark: "0px 16px 40px 0px rgba(49, 62, 81, 0.14)",
       },
+      backgroundImage: {
+        "img-mobile-dark":
+          "url(/assets/images/pattern-background-mobile-dark.svg)",
+        "img-mobile-light":
+          "url(/assets/images/pattern-background-mobile-light.svg)",
+
+        "img-tablet-dark":
+          "url(/assets/images/pattern-background-tablet-dark.svg)",
+        "img-tablet-light":
+          "url(/assets/images/pattern-background-tablet-light.svg)",
+
+        "img-desktop-dark":
+          "url(/assets/images/pattern-background-desktop-dark.svg)",
+        "img-desktop-light":
+          "url(/assets/images/pattern-background-desktop-light.svg)",
+      },
     },
     screens: {
       md: "768px",
