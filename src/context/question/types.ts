@@ -2,14 +2,16 @@
 import { Dispatch } from "react";
 
 export enum ActionTypes {
-  CHANGE_TITLE = "CHANGE_TITLE",
   GET_QUESTION = "GET_QUESTION",
   GET_QUESTION_TYPE = "GET_QUESTION_TYPE",
   INCREMENT_CURRENT_ANSWER = "INCREMENT_CURRENT_ANSWER",
+  INCREMENT_QUESTION_COUNT = "INCREMENT_QUESTION_COUNT",
+  SELECT_ANSWER = "SELECT_ANSWER",
+  SUBMIT_ANSWER = "SUBMIT_ANSWER",
   RESET_STATE = "RESET_STATE",
 }
 
-interface IQuestion {
+export interface IQuestion {
   question: string;
   options: string[];
   answer: string;
@@ -23,22 +25,26 @@ export type QuestionType = {
 
 export type State = {
   questions: IQuestion[];
-  questionLength: number;
   questionTypes: QuestionType[];
   correctAnswer: number;
-  title: string;
+  questionCount: number;
+  selectedAnswer: string;
+  isSubmit: boolean;
 };
 
 type GetQuestionsAction = {
   type: ActionTypes.GET_QUESTION;
-};
-
-type ChangeTitleAction = {
-  type: ActionTypes.CHANGE_TITLE;
+  payload?: IQuestion[];
 };
 
 type IncrementCurrentAnswerAction = {
   type: ActionTypes.INCREMENT_CURRENT_ANSWER;
+  payload: number;
+};
+
+type IncrementQuestionCount = {
+  type: ActionTypes.INCREMENT_QUESTION_COUNT;
+  payload: number;
 };
 
 type ResetStateAction = {
@@ -50,20 +56,34 @@ type GetQuestionTypeAction = {
   payload: QuestionType[];
 };
 
+type SelectAnswerAction = {
+  type: ActionTypes.SELECT_ANSWER;
+  payload: string;
+};
+
+type SubmitAnswerAction = {
+  type: ActionTypes.SUBMIT_ANSWER;
+  payload: boolean;
+};
+
 export type Action =
   | GetQuestionsAction
   | GetQuestionTypeAction
-  | ChangeTitleAction
   | IncrementCurrentAnswerAction
+  | IncrementQuestionCount
+  | SelectAnswerAction
+  | SubmitAnswerAction
   | ResetStateAction;
 
 export interface IQuestionContextType {
   state: State;
   dispatch: Dispatch<Action>;
 
-  getQuestions: () => void;
+  getQuestions: (title: string) => void;
   getQuestionType: () => void;
-  changeTitle: () => void;
   incrementCurrentAnswer: () => void;
+  incrementQuestionCount: () => void;
+  selectAnswer: (title: string) => void;
+  submitAnswer: (value: boolean) => void;
   resetState: () => void;
 }

@@ -6,6 +6,7 @@ import {
   useContext,
   useReducer,
   FunctionComponent,
+  useEffect,
 } from "react";
 import reducer from "./reducer";
 import {
@@ -17,11 +18,12 @@ import {
 import data from "@/app/data.json";
 
 const initialState: State = {
-  title: "",
   correctAnswer: 0,
-  questionLength: 0,
+  questionCount: 0,
   questions: [],
   questionTypes: [],
+  selectedAnswer: "",
+  isSubmit: false,
 };
 
 const QuestionContext = createContext<IQuestionContextType | undefined>(
@@ -33,24 +35,58 @@ const QuestionProvider: FunctionComponent<{ children: ReactNode }> = ({
 }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  /*
-  TODO
-    1- Soru bölümü seçildiğinde;
-      a- Seçilen bölümün adını title' a ekle,
-      b- Seçilen bölümün sorularını questions objesine getQuestion metodu ile ata.
-      c- question objesinin length'ini questionLength değişkenine ata
-    
-    2- Soru geldiğinde;
-      a- Soru seçildikten sonra submit butonuna basıldığında seçilen soru ile cevabı karşılaştır eğer doğru(bunun metodu soru sayfasında) ise currentAnswer sayısını bir arttır(bunun metodu burada olacak).
-  */
+  useEffect(() => {
+    const storedCorrectAnswer =
+      typeof window !== "undefined"
+        ? localStorage.getItem("correctAnswer")
+        : null;
+    if (storedCorrectAnswer) {
+      dispatch({
+        type: ActionTypes.INCREMENT_CURRENT_ANSWER,
+        payload: parseInt(storedCorrectAnswer, 10),
+      });
+    }
 
-  function getQuestions() {}
+    const storedQuestionCount =
+      typeof window !== "undefined"
+        ? localStorage.getItem("questionCount")
+        : null;
+    if (storedQuestionCount) {
+      dispatch({
+        type: ActionTypes.INCREMENT_QUESTION_COUNT,
+        payload: parseInt(storedQuestionCount, 10),
+      });
+    }
+
+    const storedQuestionTypes =
+      typeof window !== "undefined"
+        ? localStorage.getItem("questionTypes")
+        : null;
+    if (storedQuestionTypes) {
+      dispatch({
+        type: ActionTypes.GET_QUESTION_TYPE,
+        payload: JSON.parse(storedQuestionTypes),
+      });
+    }
+  }, []);
+
+  function getQuestions(title: string) {
+    const quizzes = data.quizzes;
+    const tempQuestion = quizzes.find(
+      (quiz) => quiz.title.toLowerCase() === title
+    );
+
+    dispatch({
+      type: ActionTypes.GET_QUESTION,
+      payload: tempQuestion?.questions,
+    });
+  }
 
   function getQuestionType() {
-    const result = data.quizzes;
+    const quizzes = data.quizzes;
     const tempTypes: QuestionType[] = [];
 
-    result.map((item) =>
+    quizzes.map((item) =>
       tempTypes.push({
         icon: item.icon,
         id: crypto.randomUUID(),
@@ -59,23 +95,56 @@ const QuestionProvider: FunctionComponent<{ children: ReactNode }> = ({
     );
 
     dispatch({ type: ActionTypes.GET_QUESTION_TYPE, payload: tempTypes });
+    localStorage.setItem("questionTypes", JSON.stringify(tempTypes));
   }
 
-  function changeTitle() {}
+  function selectAnswer(title: string) {
+    dispatch({ type: ActionTypes.SELECT_ANSWER, payload: title });
+  }
 
-  function incrementCurrentAnswer() {}
+  function submitAnswer(value: boolean) {
+    dispatch({ type: ActionTypes.SUBMIT_ANSWER, payload: value });
+  }
 
-  function resetState() {}
+  function incrementCurrentAnswer() {
+    dispatch({
+      type: ActionTypes.INCREMENT_CURRENT_ANSWER,
+      payload: state.correctAnswer + 1,
+    });
+    localStorage.setItem(
+      "correctAnswer",
+      JSON.stringify(state.correctAnswer + 1)
+    );
+  }
+
+  function incrementQuestionCount() {
+    dispatch({
+      type: ActionTypes.INCREMENT_QUESTION_COUNT,
+      payload: state.questionCount + 1,
+    });
+    localStorage.setItem(
+      "questionCount",
+      JSON.stringify(state.questionCount + 1)
+    );
+  }
+
+  function resetState() {
+    localStorage.removeItem("correctAnswer");
+    localStorage.removeItem("questionCount");
+    dispatch({ type: ActionTypes.RESET_STATE });
+  }
 
   return (
     <QuestionContext.Provider
       value={{
         state,
         dispatch,
-        changeTitle,
         getQuestions,
         getQuestionType,
         incrementCurrentAnswer,
+        incrementQuestionCount,
+        selectAnswer,
+        submitAnswer,
         resetState,
       }}
     >

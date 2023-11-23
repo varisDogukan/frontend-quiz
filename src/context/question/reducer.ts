@@ -1,13 +1,12 @@
 import { Action, State, ActionTypes } from "./types";
-import { initialState } from "./QuestionProvider";
 
 const reducer = (state: State, action: Action): State => {
   switch (action.type) {
-    case ActionTypes.CHANGE_TITLE:
-      return state;
-
     case ActionTypes.GET_QUESTION:
-      return state;
+      return {
+        ...state,
+        questions: action.payload!,
+      };
 
     case ActionTypes.GET_QUESTION_TYPE:
       return {
@@ -16,12 +15,36 @@ const reducer = (state: State, action: Action): State => {
       };
 
     case ActionTypes.INCREMENT_CURRENT_ANSWER:
-      return state;
+      return {
+        ...state,
+        correctAnswer: action.payload,
+      };
+
+    case ActionTypes.INCREMENT_QUESTION_COUNT:
+      return {
+        ...state,
+        questionCount: action.payload,
+      };
+
+    case ActionTypes.SELECT_ANSWER:
+      return {
+        ...state,
+        selectedAnswer: action.payload,
+      };
+
+    case ActionTypes.SUBMIT_ANSWER:
+      return {
+        ...state,
+        isSubmit: action.payload,
+      };
 
     case ActionTypes.RESET_STATE:
       return {
         ...state,
-        ...initialState,
+        correctAnswer: 0,
+        questionCount: 0,
+        selectedAnswer: "",
+        isSubmit: false,
       };
 
     default:

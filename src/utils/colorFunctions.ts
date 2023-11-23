@@ -1,15 +1,28 @@
 export function getBackgroundColor(title: string) {
   switch (title) {
-    case "HTML":
-      return "bg-question-HTML";
+    case "html":
+      return "#FFF1E9";
 
-    case "CSS":
-      return "bg-question-CSS";
+    case "css":
+      return "#E0FDEF";
 
-    case "JavaScript":
-      return "bg-question-JavaScript";
+    case "javascript":
+      return "#EBF0FF";
 
     default:
-      return "bg-question-Accessibility";
+      return "#F6E7FF";
+  }
+}
+
+export function getQuestionColor(title: string) {
+  switch (title) {
+    case "selected":
+      return "#A729F5";
+
+    case "success":
+      return "#26D782";
+
+    default:
+      return "#EE5454";
   }
 }

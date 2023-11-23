@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+
 import ThemeSwitch from "./ThemeSwitch";
 import { useTheme } from "@/context/ThemeProvider";
 

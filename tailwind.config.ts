@@ -27,12 +27,6 @@ const config: Config = {
           200: "#3B4D66", // navy
           300: "#626C7F", // grey navy
         },
-        question: {
-          HTML: "#FFF1E9",
-          CSS: "#E0FDEF",
-          JavaScript: "#EBF0FF",
-          Accessibility: "#F6E7FF",
-        },
       },
       fontFamily: {
         rubik: ["var(--font-rubik)"],
